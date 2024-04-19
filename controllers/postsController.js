@@ -18,8 +18,8 @@ exports.create_post_post = [
   body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
   body("message", "Message must be specified").trim().isLength({ min: 1 }).escape(),
   asyncHandler(async (req, res, next) => {
-    const keys = req.body.keywords.split(", ");
-    keys.push(req.body.title);
+    const keys = [req.body.title];
+    keys.push(req.body.keywords.split(", "));
     let post = await Posts.findById(req.params.id).exec();
     if (!post) {
       post = new Posts({
@@ -135,8 +135,13 @@ exports.edit_unpublished_post_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.unpublished_post_delete = asyncHandler(async (req, res, next) => {
+  const posts = Posts.findById(req.params.id).exec();
   await Posts.findByIdAndDelete(req.params.id).exec();
-  res.json({ redirect: "/unpublished" });
+  if (posts.published === false) {
+    res.json({ redirect: "/unpublished" });
+  } else {
+    res.json({ redirect: "/" });
+  }
 });
 
 exports.unpublished_post_search = asyncHandler(async (req, res, next) => {
