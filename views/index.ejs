@@ -59,12 +59,14 @@
     <% } %>
     <script>
       const search_bar = document.querySelector("#search");
-      const search_button = document.querySelector(".search_button");
+      if (search_bar.value) {
+        const search_button = document.querySelector(".search_button");
         search_button.addEventListener("click", (e) => {
         fetch(`/search/${search_bar.value}`, {method:"GET", mode:"cors"})
-        .then(res => window.location.href = `/search/${search_bar.value}`)
-        .catch(err => console.log(err))
-      })
+          .then(res => window.location.href = `/search/${search_bar.value}`)
+          .catch(err => console.log(err))
+        })
+      }
     </script>
   </body>
 </html>
