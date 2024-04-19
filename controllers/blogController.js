@@ -11,10 +11,6 @@ exports.index = asyncHandler(async (req, res, next) => {
 });
 
 exports.search = asyncHandler(async (req, res, next) => {
-  if (!req.params.search) {
-    res.redirect("/");
-    return;
-  }
   const posts = await Posts.find({
     published: true,
     keywords: { $in: req.params.search.split(" ") }

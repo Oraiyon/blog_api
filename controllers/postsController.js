@@ -17,7 +17,6 @@ exports.create_post_get = (req, res, next) => {
 exports.create_post_post = [
   body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
   body("message", "Message must be specified").trim().isLength({ min: 1 }).escape(),
-  body("keywords", "Keywords must be specified").trim().isLength({ min: 1 }).escape(),
   asyncHandler(async (req, res, next) => {
     const keys = req.body.keywords.split(", ");
     keys.push(req.body.title);
@@ -141,10 +140,6 @@ exports.unpublished_post_delete = asyncHandler(async (req, res, next) => {
 });
 
 exports.unpublished_post_search = asyncHandler(async (req, res, next) => {
-  if (!req.params.search) {
-    res.redirect("/unpublished");
-    return;
-  }
   const posts = await Posts.find({ published: false, title: req.params.search })
     .sort({ date_posted: -1 })
     .exec();
