@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/post_create.css" />
+    <title><%= title  %></title>
+  </head>
+  <body>
+    <nav>
+      <h1><a href="/">My Blog</a></h1>
+      <div>
+        <a href="/unpublished">
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Unpublished Posts</title><path d="M22.11 21.46L20.84 22.73L19.1 21C19.07 21 19.03 21 19 21H5C3.9 21 3 20.11 3 19V5C3 4.97 3 4.93 3 4.9L1.11 3L2.39 1.73L20.7 20.04L20.7 20.05L22.11 21.46M21 17.8L6.2 3H15L21 9V17.8M19.5 10L14 4.5V10H19.5Z" /></svg>
+          </button>
+        </a>
+        <a href="/logout">
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Logout</title><path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12M4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" /></svg>
+          </button>
+        </a>
+      </div>
+    </nav>
+    <h2><%= title  %></h2>
+    <form action="" method="post">
+      <div>
+        <label for="title">Title:</label>
+        <input 
+        type="text" 
+        name="title" 
+        id="title"
+        required 
+        value=<%= locals.post ? locals.post.title : "" %>>
+      </div>
+      <div class="post_textarea">
+        <label for="message">Message:</label>
+        <textarea 
+        name="message" 
+        id="message" 
+        cols="30" 
+        rows="10" 
+        required><%= locals.post ? locals.post.message : "" %></textarea>
+      </div>
+      <div>
+        <label for="published">Publish:</label>
+        <input 
+        type="checkbox" 
+        name="published" 
+        id="published"/>
+      </div>
+      <div>
+        <label for="keywords">Keywords:</label>
+        <input type="text" name="keywords" id="keywords" required value=<%= locals.post ? locals.post.keywords : "" %>>
+      </div>
+      <button>Post</button>
+    </form>
+    <% if (locals.post) { %>
+      <button class="delete" value=<%= locals.post._id %>>Delete</button>
+    <% } %>
+    <script>
+      const delete_button = document.querySelector(".delete");
+      if (delete_button) {
+        delete_button.addEventListener("click", (e) => {
+          fetch(`/unpublished/${delete_button.value}`, {method: "DELETE", mode: "cors"})
+          .then(res => res.json())
+          .then(data => window.location.href = data.redirect)
+          .catch(err => console.log(err))
+        })
+      }
+    </script>
+  </body>
+</html>

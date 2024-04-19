@@ -1,0 +1,28 @@
+form {
+  margin-bottom: 4px;
+}
+
+form div:first-child {
+  display: flex;
+  gap: 8px;
+}
+
+form div:first-child input {
+  min-width: 250px;
+}
+
+form div:last-of-type {
+  display: flex;
+  align-self: center;
+  gap: 8px;
+}
+
+form button,
+.delete {
+  min-width: 50px;
+}
+
+.post_textarea {
+  display: flex;
+  flex-direction: column;
+}

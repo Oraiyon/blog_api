@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav div {
+  display: flex;
+  gap: 4px;
+}
+
+body {
+  padding: 8px;
+}
+
+svg {
+  width: 25px;
+}
+
+nav div a button {
+  display: flex;
+  align-items: center;
+}
+
+.search_bar {
+  width: 50%;
+  gap: 0;
+  border: 1px solid black;
+}
+
+nav div button {
+  display: flex;
+  align-items: center;
+}
+
+#search {
+  width: 100%;
+  border: none;
+  padding-left: 4px;
+}
+
+.search_button {
+  border: none;
+  border-left: 1px solid black;
+}
+
+.post {
+  display: flex;
+  gap: 8px;
+}

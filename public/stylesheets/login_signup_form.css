@@ -1,0 +1,13 @@
+form {
+  display: grid;
+  grid-template-columns: max-content 200px;
+}
+
+form input {
+  margin-left: 8px;
+}
+
+nav div a button {
+  display: flex;
+  align-items: center;
+}

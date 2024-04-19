@@ -1,0 +1,20 @@
+.post_headers {
+  display: flex;
+  gap: 8px;
+}
+
+.post_delete,
+.comment_delete {
+  display: flex;
+  align-items: center;
+  width: 20px;
+}
+
+.comment_header {
+  display: flex;
+  gap: 8px;
+}
+
+form button {
+  padding: 0 4px;
+}
